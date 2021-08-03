@@ -1,24 +1,65 @@
-# README
+## usersテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column             |Type   |Options     |
+| ----------------- | ----- | ---------- |
+|nickname           |string |null: false |
+|email              |string |null: false |
+|encrypted_password |string |null: false |
+|last_name          |string |null: false |
+|first_name         |string |null: false |
+|birth_date         |integer|null: false |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+- has_many :items
+- has_many :purchase
+- belongs_to :address
 
-* System dependencies
+## itemsテーブル
 
-* Configuration
+|Column        |Type          |Options           |
+| ------------ | ------------ | ---------------- |
+|user          |references    |foreign_key: true |
+|item_name     |string        |null: false       |
+|description   |text          |null: false       |
+|image         |ActiveStorage |                  |
+|category      |integer       |null: false       |
+|item_state    |integer       |null: false       |
+|shipping_fee  |integer       |null: false       |
+|shipping_from |integer       |null: false       |
+|shipping_days |integer       |null: false       |
+|price         |string        |null: false       |
 
-* Database creation
+### Association
 
-* Database initialization
+- belongs_to :users
+- belongs_to :purchase
 
-* How to run the test suite
+## purchaseテーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+|Column        |Type          |Options           |
+| ------------ | ------------ | ---------------- |
+|user          |references    |foreign_key: true |
+|item　　　     |references    |foreign_key: true |
 
-* Deployment instructions
+### Association
 
-* ...
+- has_many :items
+- belongs_to :users
+- belongs_to :address
+
+## addressテーブル
+
+|Column        |Type  |Options     |
+| ------------ | ---- | ---------- |
+|zip           |string|null: false |
+|city          |string|null: false |
+|address_line1 |string|null: false |
+|address_line2 |string|null: false |
+|telephone     |string|null: false |
+|building      |string|null: false |
+
+### Association
+
+- belongs_to :purchase
+- belongs_to :users
