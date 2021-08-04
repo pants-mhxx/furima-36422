@@ -1,39 +1,40 @@
 ## usersテーブル
 
-|Column             |Type   |Options     |
-| ----------------- | ----- | ---------- |
-|nickname           |string |null: false |
-|email              |string |null: false |
-|encrypted_password |string |null: false |
-|last_name          |string |null: false |
-|first_name         |string |null: false |
-|birth_date         |integer|null: false |
+|Column             |Type   |Options                  |
+| ----------------- | ----- | ----------------------- |
+|nickname           |string |null: false              |
+|email              |string |null: false, unique: true|
+|encrypted_password |string |null: false              |
+|last_name          |string |null: false              |
+|first_name         |string |null: false              |
+|first_furigana     |integer|null: false              |
+|last_furigana      |integer|null: false              |
+|birth_date         |date   |null: false              |
+
 
 ### Association
 
 - has_many :items
 - has_many :purchase
-- belongs_to :address
 
 ## itemsテーブル
 
-|Column        |Type          |Options           |
-| ------------ | ------------ | ---------------- |
-|user          |references    |foreign_key: true |
-|item_name     |string        |null: false       |
-|description   |text          |null: false       |
-|image         |ActiveStorage |                  |
-|category      |integer       |null: false       |
-|item_state    |integer       |null: false       |
-|shipping_fee  |integer       |null: false       |
-|shipping_from |integer       |null: false       |
-|shipping_days |integer       |null: false       |
-|price         |string        |null: false       |
+|Column           |Type          |Options           |
+| --------------- | ------------ | ---------------- |
+|user             |references    |foreign_key: true |
+|name             |string        |null: false       |
+|description      |text          |null: false       |
+|category_id      |active_hash   |null: false       |
+|item_state_id    |active_hash   |null: false       |
+|shipping_fee_id  |active_hash   |null: false       |
+|shipping_from_id |active_hash   |null: false       |
+|shipping_day_id  |active_hash   |null: false       |
+|price            |integer       |null: false       |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :purchase
+- belongs_to :user
+- has_many :purchases
 
 ## purchaseテーブル
 
@@ -44,22 +45,22 @@
 
 ### Association
 
-- has_many :items
-- belongs_to :users
+- belongs_to :item
+- belongs_to :user
 - belongs_to :address
 
 ## addressテーブル
 
-|Column        |Type  |Options     |
-| ------------ | ---- | ---------- |
-|zip           |string|null: false |
-|city          |string|null: false |
-|address_line1 |string|null: false |
-|address_line2 |string|null: false |
-|telephone     |string|null: false |
-|building      |string|null: false |
+|Column        |Type     |Options          |
+| ------------ | ------- | --------------- |
+|zip           |string   |null: false      |
+|city          |string   |null: false      |
+|address_line1 |string   |null: false      |
+|address_line2 |string   |null: false      |
+|telephone     |string   |null: false      |
+|building      |string   |                 |
+|purchase      |reference|foreign_key: true|
 
 ### Association
 
 - belongs_to :purchase
-- belongs_to :users
