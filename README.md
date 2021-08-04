@@ -7,34 +7,34 @@
 |encrypted_password |string |null: false              |
 |last_name          |string |null: false              |
 |first_name         |string |null: false              |
-|first_furigana     |integer|null: false              |
-|last_furigana      |integer|null: false              |
+|first_furigana     |string |null: false              |
+|last_furigana      |string |null: false              |
 |birth_date         |date   |null: false              |
 
 
 ### Association
 
 - has_many :items
-- has_many :purchase
+- has_many :purchases
 
 ## itemsテーブル
 
-|Column           |Type          |Options           |
-| --------------- | ------------ | ---------------- |
-|user             |references    |foreign_key: true |
-|name             |string        |null: false       |
-|description      |text          |null: false       |
-|category_id      |active_hash   |null: false       |
-|item_state_id    |active_hash   |null: false       |
-|shipping_fee_id  |active_hash   |null: false       |
-|shipping_from_id |active_hash   |null: false       |
-|shipping_day_id  |active_hash   |null: false       |
-|price            |integer       |null: false       |
+|Column           |Type       |Options           |
+| --------------- | --------- | ---------------- |
+|user             |references |foreign_key: true |
+|name             |string     |null: false       |
+|description      |text       |null: false       |
+|category_id      |integer    |null: false       |
+|item_state_id    |integer    |null: false       |
+|shipping_fee_id  |integer    |null: false       |
+|shipping_from_id |integer    |null: false       |
+|shipping_day_id  |integer    |null: false       |
+|price            |integer    |null: false       |
 
 ### Association
 
 - belongs_to :user
-- has_many :purchases
+- has_one :purchase
 
 ## purchaseテーブル
 
@@ -47,7 +47,7 @@
 
 - belongs_to :item
 - belongs_to :user
-- belongs_to :address
+- has_one :address
 
 ## addressテーブル
 
