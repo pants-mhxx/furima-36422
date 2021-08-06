@@ -17,7 +17,6 @@ class User < ApplicationRecord
       validates :last_furigana
     end
   end
-  
-  
+  has_many :items
   
 end
