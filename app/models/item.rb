@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
+    validates :image
     validates :name
     validates :description
     validates :category_id, numericality: { other_than: 0 , message: "can't be blank"}
@@ -10,7 +11,7 @@ class Item < ApplicationRecord
     validates :shipping_fee_id, numericality: { other_than: 0 , message: "can't be blank"}
     validates :shipping_from_id, numericality: { other_than: 0 , message: "can't be blank"}
     validates :shipping_day_id, numericality: { other_than: 0 , message: "can't be blank"}
-    validates :price
+    validates :price, numericality: {greater_than: 300,less_than: 9999999}, format: { with: /\A[0-9]+\z/ }
   end
   extend ActiveHash::Associations::ActiveRecordExtensions
 
