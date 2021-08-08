@@ -5,11 +5,11 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :description
-    validates :category_id
-    validates :item_state_id
-    validates :shipping_fee_id
-    validates :shipping_from_id
-    validates :shipping_day_id
+    validates :category_id, numericality: { other_than: 0 , message: "can't be blank"}
+    validates :item_state_id, numericality: { other_than: 0 , message: "can't be blank"}
+    validates :shipping_fee_id, numericality: { other_than: 0 , message: "can't be blank"}
+    validates :shipping_from_id, numericality: { other_than: 0 , message: "can't be blank"}
+    validates :shipping_day_id, numericality: { other_than: 0 , message: "can't be blank"}
     validates :price
   end
   extend ActiveHash::Associations::ActiveRecordExtensions
