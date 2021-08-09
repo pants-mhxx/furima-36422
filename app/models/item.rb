@@ -16,10 +16,6 @@ class Item < ApplicationRecord
     validates :price, numericality: { greater_than: 299, less_than: 10_000_000 }, format: { with: /\A[0-9]+\z/ }
   end
 
-  def was_attached?
-    self.image.attached?
-  end
-
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :category
