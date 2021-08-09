@@ -6,18 +6,20 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :description
-    validates :category_id, numericality: { other_than: 0, message: "can't be blank" }
-    validates :item_state_id, numericality: { other_than: 0, message: "can't be blank" }
-    validates :shipping_fee_id, numericality: { other_than: 0, message: "can't be blank" }
-    validates :shipping_from_id, numericality: { other_than: 0, message: "can't be blank" }
-    validates :shipping_day_id, numericality: { other_than: 0, message: "can't be blank" }
+    with_options numericality: { other_than: 0, message: "can't be blank" } do
+      validates :category_id
+      validates :item_state_id
+      validates :shipping_fee_id
+      validates :shipping_from_id
+      validates :shipping_day_id
+    end
     validates :price, numericality: { greater_than: 299, less_than: 10_000_000 }, format: { with: /\A[0-9]+\z/ }
   end
 
   def was_attached?
     self.image.attached?
   end
-  
+
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :category
