@@ -51,15 +51,15 @@
 
 ## addressテーブル
 
-|Column        |Type      |Options          |
-| ------------ | -------- | --------------- |
-|zip           |string    |null: false      |
-|city          |string    |null: false      |
-|address_line1 |string    |null: false      |
-|address_line2 |string    |null: false      |
-|telephone     |string    |null: false      |
-|building      |string    |                 |
-|purchase      |references|foreign_key: true|
+|Column           |Type      |Options          |
+| --------------- | -------- | --------------- |
+|zip              |string    |null: false      |
+|shipping_from_id |integer   |null: false      |
+|address_line1    |string    |null: false      |
+|address_line2    |string    |null: false      |
+|telephone        |string    |null: false      |
+|building         |string    |                 |
+|purchase         |references|foreign_key: true|
 
 ### Association
 
