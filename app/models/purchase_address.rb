@@ -14,9 +14,7 @@ class PurchaseAddress
 
   def save
     purchase = Purchase.create(item_id: item_id, user_id: user_id)
-    Address.create(zip: zip, shipping_from_id: shipping_from_id, address_line1: address_line1, address_line2: address_line2, building: building, telephone: telephone)
+    Address.create(zip: zip, shipping_from_id: shipping_from_id, address_line1: address_line1, address_line2: address_line2, building: building, telephone: telephone, purchase_id: purchase.id)
   end
 
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :shipping_from
 end

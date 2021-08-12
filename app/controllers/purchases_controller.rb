@@ -3,19 +3,22 @@ class PurchasesController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
-  end
-
-  def new
     @purchase_address = PurchaseAddress.new
   end
 
+  def new
+    
+  end
+
   def create
-    @purchase_address = PurchaseAddress.new(purchase_address)
+    @purchase_address = PurchaseAddress.new(purchase_params)
     if @purchase_address.valid?
       @purchase_address.save
       redirect_to root_path
     else
-      render :new
+      binding.pry
+      @item = Item.find(params[:item_id])
+      render :index
     end
   end
 
