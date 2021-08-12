@@ -16,11 +16,12 @@ class PurchasesController < ApplicationController
       redirect_to root_path
     else
       render :new
+    end
   end
 
   private
 
   def purchase_params
-    params.require(:purchase_address).permit(:zip, :shipping_from, :address_line1, :address_line2, :building, :telephone).merge(user_id: current_user.id, item_id: params[:item_id] )
+    params.require(:purchase_address).permit(:zip, :shipping_from_id, :address_line1, :address_line2, :building, :telephone).merge(user_id: current_user.id, item_id: params[:item_id] )
   end
 end

@@ -1,6 +1,6 @@
 class PurchaseAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :zip, :shipping_from, :address_line1, :address_line2, :telephone, :building, :purchase
+  attr_accessor :user_id, :item_id, :zip, :shipping_from_id, :address_line1, :address_line2, :telephone, :building, :purchase
 
   with_options presence: true do
     validates :user_id
@@ -10,10 +10,13 @@ class PurchaseAddress
     validates :address_line2
     validates :telephone
   end
-  validates :shipping_from, numericality: {other_than: 0, message: "can't be blank"}
+  validates :shipping_from_id, numericality: {other_than: 0, message: "can't be blank"}
 
   def save
-    purchase = Purchase.create(item: item_id, user_id: user_id)
-    Address.create(zip: zip, shipping_from: shipping_from, address_line1: address_line1, address_line2: address_line2, building: building, telephone: telephone)
+    purchase = Purchase.create(item_id: item_id, user_id: user_id)
+    Address.create(zip: zip, shipping_from_id: shipping_from_id, address_line1: address_line1, address_line2: address_line2, building: building, telephone: telephone)
   end
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :shipping_from
 end
