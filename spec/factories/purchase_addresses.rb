@@ -8,5 +8,6 @@ FactoryBot.define do
     telephone { 11111111111 }
     user_id { 1 }
     item_id { 1 }
+    token {'ENV["PAYJP_SECRET_KEY"]'}
   end
 end

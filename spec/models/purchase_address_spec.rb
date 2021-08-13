@@ -82,5 +82,17 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include "Telephone is invalid"
       end
     end
+    context 'クレカ支払いが可能' do
+      it '必要な情報が全て揃っている' do
+        expect(@purchase_address).to be_valid
+      end
+    end
+    context 'クレカ支払いができない時' do
+      it 'クレカ情報が空欄' do
+        @purchase_address.token = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include "Token can't be blank"
+      end
+    end
   end
 end
