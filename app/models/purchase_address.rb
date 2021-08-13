@@ -3,6 +3,7 @@ class PurchaseAddress
   attr_accessor :user_id, :item_id, :zip, :shipping_from_id, :address_line1, :address_line2, :telephone, :building, :purchase, :token
 
   with_options presence: true do
+    validates :token
     validates :user_id
     validates :item_id
     validates :zip, format: {with: /\A[0-9]{3}-[0-9]{4}\z/}
