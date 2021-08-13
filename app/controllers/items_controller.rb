@@ -51,9 +51,7 @@ class ItemsController < ApplicationController
   end
 
   def set_product
-    if @item.purchase != nil
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.purchase.nil?
   end
 
   def move_to_index

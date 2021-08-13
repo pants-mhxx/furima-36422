@@ -6,10 +6,6 @@ FactoryBot.define do
     address_line2 { 'あああああああ' }
     building { 'あああああああ' }
     telephone { '11111111111' }
-    token {'ENV["PAYJP_SECRET_KEY"]'}
-    association :user
-    association :item
-
-  
+    token { 'ENV["PAYJP_SECRET_KEY"]' }
   end
 end

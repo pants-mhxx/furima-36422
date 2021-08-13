@@ -37,22 +37,22 @@ RSpec.describe PurchaseAddress, type: :model do
       it '郵便番号は半角数字のみ' do
         @purchase_address.zip = '１２３-１２３４'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include "Zip is invalid"
+        expect(@purchase_address.errors.full_messages).to include 'Zip is invalid'
       end
       it '郵便番号はハイフン必須' do
         @purchase_address.zip = '1234567'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include "Zip is invalid"
+        expect(@purchase_address.errors.full_messages).to include 'Zip is invalid'
       end
       it '郵便番号は頭3文字のみ' do
         @purchase_address.zip = '1234-5678'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include "Zip is invalid"
+        expect(@purchase_address.errors.full_messages).to include 'Zip is invalid'
       end
       it '郵便番号は後ろ4文字のみ' do
         @purchase_address.zip = '123-56789'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include "Zip is invalid"
+        expect(@purchase_address.errors.full_messages).to include 'Zip is invalid'
       end
       it '都道府県未選択' do
         @purchase_address.shipping_from_id = 0
@@ -77,12 +77,12 @@ RSpec.describe PurchaseAddress, type: :model do
       it '電話番号は半角数字しか登録できない' do
         @purchase_address.telephone = '０１０１１１１１１１１'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include "Telephone is invalid"
+        expect(@purchase_address.errors.full_messages).to include 'Telephone is invalid'
       end
       it '電話番号は10or11桁しか登録できない' do
         @purchase_address.telephone = '010000000000'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include "Telephone is invalid"
+        expect(@purchase_address.errors.full_messages).to include 'Telephone is invalid'
       end
     end
     context 'クレカ支払いが可能' do

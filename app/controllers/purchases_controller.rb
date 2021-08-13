@@ -21,7 +21,9 @@ class PurchasesController < ApplicationController
   private
 
   def purchase_params
-    params.require(:purchase_address).permit(:zip, :shipping_from_id, :address_line1, :address_line2, :building, :telephone).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:purchase_address).permit(:zip, :shipping_from_id, :address_line1, :address_line2, :building, :telephone).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def set_item
@@ -29,20 +31,16 @@ class PurchasesController < ApplicationController
   end
 
   def set_product
-    if @item.purchase != nil
-      redirect_to root_path
-    end
-    if @item.user_id = current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.purchase.nil?
+    redirect_to root_path if @item.user_id = current_user.id
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: purchase_params[:token], 
-        currency: 'jpy'    
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: purchase_params[:token],
+      currency: 'jpy'
     )
   end
 end
