@@ -5,9 +5,11 @@ FactoryBot.define do
     address_line1 { 'あああああああ' }
     address_line2 { 'あああああああ' }
     building { 'あああああああ' }
-    telephone { 11111111111 }
-    user_id { 1 }
-    item_id { 1 }
+    telephone { '11111111111' }
     token {'ENV["PAYJP_SECRET_KEY"]'}
+    association :user
+    association :item
+
+  
   end
 end
