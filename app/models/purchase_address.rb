@@ -8,7 +8,7 @@ class PurchaseAddress
     validates :zip, format: {with: /\A[0-9]{3}-[0-9]{4}\z/}
     validates :address_line1
     validates :address_line2
-    validates :telephone
+    validates :telephone, format: { with: /\A\d{10,11}\z/ }
   end
   validates :shipping_from_id, numericality: {other_than: 0, message: "can't be blank"}
 
