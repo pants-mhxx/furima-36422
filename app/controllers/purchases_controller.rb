@@ -32,7 +32,7 @@ class PurchasesController < ApplicationController
 
   def set_product
     redirect_to root_path unless @item.purchase.nil?
-    redirect_to root_path if @item.user_id = current_user.id
+    redirect_to root_path if @item.user_id == current_user.id
   end
 
   def pay_item
